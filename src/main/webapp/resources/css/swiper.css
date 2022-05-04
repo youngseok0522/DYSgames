@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+.swiper {
+	width: 800px;
+	height: 400px;
+}
+
+.swiper-button-prev {
+	color: #fff !important;
+	opacity: 0.7;
+}
+
+.swiper-button-next {
+	color: #fff !important;
+	opacity: 0.7;
+}
+
+.swiper-pagination-bullet {
+	width: 12px;
+	height: 12px;
+	background: transparent !important;
+	border: 1px solid white !important;
+	/* 불투명도 */
+	opacity: 0.5;
+}
+
+.swiper-pagination-bullet-active {
+	width: 25px;
+	transition: width .5s;
+	border-radius: 5px;
+	background: #fff !important;
+	border: 1px solid transparent;
+	opacity: 0.5;
+}
+

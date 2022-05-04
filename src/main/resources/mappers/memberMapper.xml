@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.games.dys.member.dao.MemberDAO">
+	<insert id="insertMember" parameterType="com.games.dys.member.dto.MemberDTO">
+		INSERT INTO dys_member VALUES(#{id}, #{pw}, #{email}, #{zipcode}, #{address1}, #{address2})		
+	</insert>	
+	<insert id="insertLogin" parameterType="com.games.dys.member.dto.MemberDTO">
+		INSERT INTO dys_login VALUES(#{id}, #{pw})
+	</insert>
+	<select id="idExist" resultType="int" parameterType="String">
+		SELECT count(*) FROM dys_member WHERE id=#{id}
+	</select>
+
+</mapper>

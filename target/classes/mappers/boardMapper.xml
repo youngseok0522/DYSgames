@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.games.dys.board.dao.GameDAO">
+	<insert id="gameRegiProc" parameterType="com.games.dys.board.dto.GameDTO">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			SELECT nvl(max(no), 0)+1 FROM game_board
+		</selectKey>
+		INSERT INTO game_board VALUES(#{no}, #{title}, #{link}, #{price}, #{launching}, #{genre}, #{publisher}, #{developer}, #{platform}, #{language}, #{explanation})
+	</insert>
+	
+	<select id="gameProc" resultType="com.games.dys.board.dto.GameDTO">
+		SELECT B.* FROM(
+			SELECT rownum rn, A.* FROM(
+				SELECT * FROM game_board				
+					<!-- WHERE title LIKE '%'||#{search}||'%' -->				
+				 ORDER BY no DESC
+			)A
+		)B WHERE rn BETWEEN #{b} and #{e}
+	</select>
+	
+	<select id="gameCount" resultType="int"  parameterType="HashMap">
+		SELECT count(*) FROM game_board	
+			<!-- WHERE title LIKE '%'||#{search}||'%' -->
+	</select>
+	
+	<select id="gameView" resultType="com.games.dys.board.dto.GameDTO" parameterType="int">
+		SELECT * FROM game_board WHERE no=#{no}
+	</select>
+	
+	<update id="gameModificationProc" parameterType="com.games.dys.board.dto.GameDTO">
+		UPDATE game_board SET title=#{title}, link=#{link}, price=#{price}, launching=#{launching}, genre=#{genre}, publisher=#{publisher}, developer=#{developer}, platform=#{platform}, language=#{language}, explanation=#{explanation} WHERE no=#{no} 
+	</update>
+</mapper>
